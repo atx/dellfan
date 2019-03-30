@@ -1,0 +1,18 @@
+Source: dellfan
+Section: admin
+Priority: optional
+Maintainer: Josef Gajdusek <atx@atx.name>
+Uploaders: Josef Gajdusek <atx@atx.name>
+Build-Depends: debhelper (>= 10), dh-systemd, dh-python,
+			   python3
+Standards-Version: 3.9.6
+Vcs-Git: https://github.com/atx/dellfan.git
+Vcs-Browser: https://github.com/atx/dellfan
+Homepage: https://github.com/atx/dellfan
+
+Package: dellfan
+Architecture: all
+Section: net
+Depends: python3-psutil, ${misc:Depends}, ${python3:Depends}
+Description: Dell fan daemon
+ Dell fan daemon

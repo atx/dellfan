@@ -1,0 +1,12 @@
+[Unit]
+Description=Dell Fan control service
+Requires=dev-ipmi0.device
+
+[Service]
+EnvironmentFile=-/etc/default/dellfan
+ExecStart=/usr/sbin/dellfan.py $ARGS
+User=root
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

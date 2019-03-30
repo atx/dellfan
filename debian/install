@@ -1,0 +1,3 @@
+dellfan.py usr/sbin/
+dellfan.service lib/systemd/system
+debian/etc/default/dellfan /etc/default/
