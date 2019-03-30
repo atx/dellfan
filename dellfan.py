@@ -42,7 +42,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-r", "--poll-rate",
-        type=float, default=15.
+        type=float, default=10.
     )
     parser.add_argument(
         "--dump-curve",
