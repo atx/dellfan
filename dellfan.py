@@ -51,6 +51,10 @@ if __name__ == "__main__":
         "--print",
         action="store_true",
     )
+    parser.add_argument(
+        "-m", "--min-speed",
+        type=float, default=0.18
+    )
     args = parser.parse_args()
 
     if args.dump_curve:
@@ -77,7 +81,10 @@ if __name__ == "__main__":
         temperature = max(t.current for t in psutil.sensors_temperatures()["coretemp"])
         # Adjust the fan speed
         # TODO: Add some hysteresis here
-        fan_speed = temperature_to_fan_speed(temperature)
+        # The minimum speed setting is to stop iDRAC complaining about failed
+        # fans. The server runs fine even with 0RPM in idle, but iDRAC
+        # complains.
+        fan_speed = max(args.min_speed, temperature_to_fan_speed(temperature))
         ipmi_set_fan_speed(fan_speed)
         if args.print:
             print(temperature, fan_speed)
