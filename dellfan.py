@@ -8,7 +8,6 @@ import time
 
 
 def ipmi_raw(bytes_):
-    print("IPMI", " ".join("{:02x}".format(b) for b in bytes_))
     subprocess.check_call(
         ["ipmitool", "raw"] + ["0x{:02x}".format(b) for b in bytes_]
     )
@@ -42,11 +41,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-r", "--poll-rate",
-        type=float, default=10.
+        type=float, default=10.,
     )
     parser.add_argument(
         "--dump-curve",
-        action="store_true"
+        action="store_true",
+    )
+    parser.add_argument(
+        "--print",
+        action="store_true",
     )
     args = parser.parse_args()
 
@@ -76,4 +79,5 @@ if __name__ == "__main__":
         # TODO: Add some hysteresis here
         fan_speed = temperature_to_fan_speed(temperature)
         ipmi_set_fan_speed(fan_speed)
-        print(temperature, fan_speed)
+        if args.print:
+            print(temperature, fan_speed)
